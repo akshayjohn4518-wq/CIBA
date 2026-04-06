@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIBA — Church of I AM Bible Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1F3A;
+    --navy-deep: #071526;
+    --gold: #D4AF37;
+    --gold-dark: #B8960F;
+    --gold-light: #E8C94A;
+    --white: #FFFFFF;
+    --text-muted: #8a9bb5;
+    --error: #ef4444;
+    --success: #10b981;
+  }
+
+  html, body {
+    min-height: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    background: var(--navy-deep);
+  }
+
+  .close-page-btn {
+    position: fixed;
+    top: 18px;
+    right: 22px;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(212,175,55,0.35);
+    color: #000000;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 24px rgba(7,21,38,0.22);
+    z-index: 1000;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .close-page-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(212,175,55,0.18);
+    color: #000000;
+  }
+
+  .close-page-btn i {
+    font-size: 18px;
+  }
+
+  /* ══════════════════════════
+     DESKTOP: SIDE-BY-SIDE
+  ══════════════════════════ */
+  .brand-panel {
+    flex: 0 0 60%;
+    position: relative;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 50px;
+    overflow: hidden;
+  }
+
+  .brand-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(212,175,55,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .corner {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    opacity: 0.35;
+  }
+  .corner-tl { top: 22px; left: 22px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+  .corner-tr { top: 22px; right: 22px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+  .corner-bl { bottom: 22px; left: 22px; border-bottom: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+  .corner-br { bottom: 22px; right: 22px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+
+  .brand-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .accent-line {
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-bottom: 32px;
+  }
+
+  .logo-wrapper {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  .logo-glow {
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, transparent 70%);
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+  }
+
+  .logo-img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 8px 28px rgba(212,175,55,0.28));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .brand-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .brand-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 26px;
+  }
+
+  .gold-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 300px;
+    margin-bottom: 18px;
+  }
+  .gold-rule::before, .gold-rule::after {
+    content: ''; flex: 1; height: 1px;
+  }
+  .gold-rule::before { background: linear-gradient(90deg, transparent, var(--gold)); }
+  .gold-rule::after  { background: linear-gradient(90deg, var(--gold), transparent); }
+  .gold-rule span { color: var(--gold); font-size: 12px; }
+
+  .tagline {
+    font-size: 10.5px;
+    font-weight: 400;
+    color: #7a90ad;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 2.4;
+    text-align: center;
+  }
+  .tagline em { color: rgba(212,175,55,0.85); font-style: normal; }
+
+  .accent-line-btm {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-top: 24px;
+  }
+
+  .founding {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9.5px;
+    letter-spacing: 0.3em;
+    color: rgba(212,175,55,0.35);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ══════════════════════════
+     FORM PANEL
+  ══════════════════════════ */
+  .form-panel {
+    flex: 0 0 40%;
+    background: #f4f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 28px;
+  }
+
+  .form-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px 34px;
+    box-shadow:
+      0 4px 6px rgba(11,31,58,0.04),
+      0 16px 48px rgba(11,31,58,0.10),
+      0 0 0 1px rgba(212,175,55,0.08);
+    animation: slide-up 0.5s ease both;
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Tabs */
+  .tab-bar {
+    display: flex;
+    background: #edf0f4;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .tab-pill {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: calc(100% - 8px);
+    width: calc(50% - 4px);
+    background: var(--white);
+    border-radius: 9px;
+    box-shadow: 0 2px 8px rgba(11,31,58,0.10);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 0;
+  }
+  .tab-pill.on-signup { transform: translateX(calc(100% + 0px)); }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #9aabb8;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+    border-radius: 9px;
+  }
+  .tab-btn.active { color: var(--navy); }
+
+  /* Header */
+  .form-header { margin-bottom: 22px; }
+
+  .form-greeting {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+
+  .form-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* Fields */
+  .field { margin-bottom: 14px; }
+
+  .field label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: #6b7a8f;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .input-wrap { 
+    position: relative; 
+  }
+
+  .input-wrap input {
+    width: 100%;
+    padding: 11px 15px 11px 40px;
+    border: 1.5px solid #e4e9f0;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--navy);
+    background: #fafbfc;
+    outline: none;
+    transition: all 0.22s;
+    -webkit-appearance: none;
+  }
+
+  .input-wrap input:focus {
+    border-color: var(--gold);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.13);
+  }
+
+  .input-wrap input.error {
+    border-color: var(--error);
+    background: rgba(239,68,68,0.04);
+  }
+
+  .input-wrap input.error:focus {
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.13);
+  }
+
+  .input-wrap input::placeholder { color: #b8c5d3; font-size: 12.5px; }
+
+  .input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c4d0dd;
+    font-size: 14px;
+    pointer-events: none;
+    transition: color 0.22s;
+    line-height: 1;
+  }
+
+  .input-wrap:focus-within .input-icon { color: var(--gold); }
+
+  .input-wrap input.error ~ .input-icon { color: var(--error); }
+
+  /* Password toggle button */
+  .password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #c4d0dd;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.22s;
+    line-height: 1;
+  }
+
+  .password-toggle:hover { color: var(--gold); }
+
+  .input-wrap:focus-within .password-toggle { color: var(--gold); }
+
+  .input-wrap input.error ~ .password-toggle { color: var(--error); }
+
+  /* Error message */
+  .error-msg {
+    display: none;
+    font-size: 11px;
+    color: var(--error);
+    margin-top: 4px;
+    animation: shake 0.3s ease-in-out;
+  }
+
+  .error-msg.show { display: block; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+
+  /* Extras row */
+  .form-extras {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 6px 0 22px;
+  }
+
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .remember input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #d0d8e6;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .remember input[type="checkbox"]:checked {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .remember input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 8px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .remember span { font-size: 12px; color: #7a8a9e; }
+
+  .forgot-link {
+    font-size: 12px;
+    color: var(--gold-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .forgot-link:hover { color: var(--gold); }
+
+  /* Button */
+  .btn-primary {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 55%, var(--gold-dark) 100%);
+    color: var(--navy);
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(212,175,55,0.35);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(212,175,55,0.45); }
+  .btn-primary:hover:not(:disabled)::before { left: 100%; }
+  .btn-primary:active:not(:disabled) { transform: translateY(0); box-shadow: 0 4px 12px rgba(212,175,55,0.3); }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* Form sections */
+  .form-section {
+    display: none;
+    animation: fade-in 0.3s ease both;
+  }
+  .form-section.active { display: block; }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateX(8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .form-footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+  .form-footer a {
+    color: var(--gold-dark);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .form-footer a:hover { color: var(--gold); text-decoration: underline; }
+
+  /* Success message */
+  .success-msg {
+    display: none;
+    padding: 12px 14px;
+    background: rgba(16,185,129,0.1);
+    border: 1.5px solid var(--success);
+    border-radius: 10px;
+    color: var(--success);
+    font-size: 12px;
+    margin-bottom: 16px;
+    animation: fade-in 0.3s ease;
+  }
+
+  .success-msg.show { display: block; }
+
+  /* ══════════════════════════
+     MOBILE — MINIMAL VIEW
+  ══════════════════════════ */
+  @media (max-width: 768px) {
+
+    body {
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #f4f5f7;
+    }
+
+    .close-page-btn {
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      background: rgba(11,31,58,0.82);
+      color: #000000;
+    }
+
+    .brand-panel {
+      flex: 0 0 auto;
+      padding: 28px 16px 16px;
+      min-height: unset;
+      background: #f4f5f7;
+    }
+
+    .brand-panel::before { display: none; }
+
+    .corner, .founding, .accent-line, .brand-sub, .gold-rule, .tagline, .accent-line-btm { 
+      display: none; 
+    }
+
+    .logo-wrapper {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 10px;
+    }
+    .logo-img { 
+      width: 80px; 
+      height: 80px; 
+      filter: none;
+      animation: none;
+    }
+    .logo-glow { display: none; }
+
+    .brand-content {
+      padding-bottom: 0;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      line-height: 1.2;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .form-panel {
+      flex: 1 1 auto;
+      padding: 16px 12px 32px;
+      background: #f4f5f7;
+      align-items: flex-start;
+    }
+
+    .form-card {
+      border-radius: 12px;
+      padding: 20px 16px 24px;
+      animation: none;
+      max-width: 100%;
+      box-shadow: none;
+      border: none;
+      background: #f4f5f7;
+    }
+
+    .tab-bar { 
+      margin-bottom: 18px;
+      background: transparent;
+      padding: 0;
+    }
+
+    .tab-pill { display: none; }
+
+    .tab-btn {
+      padding: 8px 0;
+      background: transparent;
+      font-size: 12px;
+      color: #7a8a9e;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+    }
+    
+    .tab-btn.active { 
+      color: var(--navy); 
+      border-bottom-color: var(--navy);
+      font-weight: 600;
+    }
+
+    .form-greeting { 
+      font-size: 18px; 
+      margin-bottom: 2px;
+    }
+
+    .form-header { margin-bottom: 16px; }
+
+    .form-sub { font-size: 11px; }
+
+    .field { margin-bottom: 10px; }
+
+    .field label { font-size: 10px; }
+
+    .input-wrap input {
+      padding: 10px 12px 10px 36px;
+      font-size: 13px;
+      border-radius: 6px;
+    }
+
+    .input-wrap input::placeholder { font-size: 12px; }
+
+    .input-icon { left: 10px; font-size: 13px; }
+
+    .form-extras { margin: 6px 0 14px; }
+
+    .remember span { font-size: 11px; }
+
+    .forgot-link { font-size: 11px; }
+
+    .btn-primary {
+      padding: 12px;
+      font-size: 12px;
+      box-shadow: 0 2px 8px rgba(212,175,55,0.2);
+    }
+
+    .form-footer { margin-top: 14px; font-size: 11px; }
+
+    .error-msg { font-size: 10px; }
+
+    .success-msg { font-size: 11px; padding: 10px 12px; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 380px) {
+    .logo-wrapper { width: 75px; height: 75px; }
+    .logo-img { width: 70px; height: 70px; }
+    .brand-title { font-size: 14px; }
+    .form-card { padding: 18px 12px 20px; }
+    .form-greeting { font-size: 16px; }
+    .input-wrap input { padding: 9px 10px 9px 34px; font-size: 12px; }
+    .btn-primary { padding: 11px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="CIBA_01.html" class="close-page-btn" aria-label="Back to home page">
+  <i class="fa-solid fa-xmark"></i>
+</a>
+
+<!-- ── BRAND PANEL ── -->
+<div class="brand-panel">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="brand-content">
+    <div class="accent-line"></div>
+
+    <div class="logo-wrapper">
+      <div class="logo-glow"></div>
+      <img src="ciba-logo.png" alt="Church of I AM Bible Academy logo" class="logo-img">
+    </div>
+
+    <h1 class="brand-title">Church of I AM</h1>
+    <p class="brand-sub">Bible Academy · CIBA</p>
+
+
+
+    <div class="accent-line-btm"></div>
+  </div>
+
+  <div class="founding">© 2024 Church of I AM</div>
+</div>
+
+<!-- ── FORM PANEL ── -->
+<div class="form-panel">
+  <div class="form-card">
+    
+    <!-- Tabs -->
+    <div class="tab-bar">
+      <div class="tab-pill" id="tabPill"></div>
+      <button class="tab-btn active" onclick="switchTab('login')" id="loginTab">Login</button>
+      <button class="tab-btn" onclick="switchTab('signup')" id="signupTab">Sign Up</button>
+    </div>
+
+    <!-- LOGIN SECTION -->
+    <div class="form-section active" id="loginSection">
+      <div class="form-header">
+        <h2 class="form-greeting">Welcome Back</h2>
+        <p class="form-sub">Access your CIBA account</p>
+      </div>
+
+      <div class="success-msg" id="successMsg"></div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <!-- Email Field -->
+        <div class="field">
+          <label for="loginEmail">Email Address</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input 
+              type="email" 
+              id="loginEmail" 
+              placeholder="your.email@domain.com"
+              required
+            >
+            <div class="error-msg" id="loginEmailError"></div>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input 
+              type="password" 
+              id="loginPassword" 
+              placeholder="••••••••"
+              required
+            >
+            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')" title="Show/hide password"><i class="fas fa-eye"></i></button>
+            <div class="error-msg" id="loginPasswordError"></div>
+          </div>
+        </div>
+
+        <!-- Extras -->
+        <div class="form-extras">
+          <label class="remember">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a class="forgot-link" onclick="alert('Password reset functionality coming soon!')">Forgot password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+
+      <div class="form-footer">
+        Don't have an account? <a onclick="switchTab('signup')">Sign up here</a>
+      </div>
+    </div>
+
+    <!-- SIGNUP SECTION -->
+    <div class="form-section" id="signupSection">
+      <div class="form-header">
+        <h2 class="form-greeting">Join Us</h2>
+        <p class="form-sub">Create your CIBA account</p>
+      </div>
+
+      <div class="success-msg" id="successMsg2"></div>
+
+      <form id="signupForm" onsubmit="handleSignup(event)">
+        <!-- Full Name Field -->
+        <div class="field">
+          <label for="signupName">Full Name</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input 
+              type="text" 
+              id="signupName" 
+              placeholder="Your full name"
+              required
+            >
+            <div class="error-msg" id="signupNameError"></div>
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="field">
+          <label for="signupEmail">Email Address</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input 
+              type="email" 
+              id="signupEmail" 
+              placeholder="your.email@domain.com"
+              required
+            >
+            <div class="error-msg" id="signupEmailError"></div>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="field">
+          <label for="signupPassword">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input 
+              type="password" 
+              id="signupPassword" 
+              placeholder=""
+              required
+            >
+            <button type="button" class="password-toggle" onclick="togglePassword('signupPassword')" title="Show/hide password"><i class="fas fa-eye"></i></button>
+            <div class="error-msg" id="signupPasswordError"></div>
+          </div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="field">
+          <label for="signupConfirm">Confirm Password</label>
+          <div class="input-wrap">
+            <span class="input-icon"></span>
+            <input 
+              type="password" 
+              id="signupConfirm" 
+              placeholder="Re-enter your password"
+              required
+            >
+            <button type="button" class="password-toggle" onclick="togglePassword('signupConfirm')" title="Show/hide password"><i class="fas fa-eye"></i></button>
+            <div class="error-msg" id="signupConfirmError"></div>
+          </div>
+        </div>
+
+        <!-- Terms checkbox -->
+        <div class="field">
+          <label class="remember">
+            <input type="checkbox" id="agreeTerms" required>
+            <span>I agree to the Terms & Conditions</span>
+          </label>
+          <div class="error-msg" id="signupTermsError"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary">Create Account</button>
+      </form>
+
+      <div class="form-footer">
+        Already have an account? <a onclick="switchTab('login')">Login here</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ═══════════════════════════════════════════
+  // PASSWORD VISIBILITY TOGGLE
+  // ═══════════════════════════════════════════
+  function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const toggle = input.parentElement.querySelector('.password-toggle i');
+    
+    if (input.type === 'password') {
+      input.type = 'text';
+      toggle.classList.remove('fa-eye');
+      toggle.classList.add('fa-eye-slash');
+    } else {
+      input.type = 'password';
+      toggle.classList.remove('fa-eye-slash');
+      toggle.classList.add('fa-eye');
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // TAB SWITCHING
+  // ═══════════════════════════════════════════
+  function switchTab(tab) {
+    const loginSection = document.getElementById('loginSection');
+    const signupSection = document.getElementById('signupSection');
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+    const tabPill = document.getElementById('tabPill');
+
+    if (tab === 'login') {
+      loginSection.classList.add('active');
+      signupSection.classList.remove('active');
+      loginTab.classList.add('active');
+      signupTab.classList.remove('active');
+      tabPill.classList.remove('on-signup');
+    } else {
+      signupSection.classList.add('active');
+      loginSection.classList.remove('active');
+      signupTab.classList.add('active');
+      loginTab.classList.remove('active');
+      tabPill.classList.add('on-signup');
+    }
+
+    clearAllErrors();
+  }
+
+  // ═══════════════════════════════════════════
+  // VALIDATION FUNCTIONS
+  // ═══════════════════════════════════════════
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function validatePassword(password) {
+    // Min 8 chars, at least 1 uppercase, at least 1 number
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return passwordRegex.test(password);
+  }
+
+  function showError(inputId, errorId, message) {
+    const input = document.getElementById(inputId);
+    const errorMsg = document.getElementById(errorId);
+    input.classList.add('error');
+    errorMsg.textContent = message;
+    errorMsg.classList.add('show');
+  }
+
+  function clearError(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const errorMsg = document.getElementById(errorId);
+    input.classList.remove('error');
+    errorMsg.textContent = '';
+    errorMsg.classList.remove('show');
+  }
+
+  function clearAllErrors() {
+    const inputs = document.querySelectorAll('.input-wrap input[type="email"], .input-wrap input[type="password"], .input-wrap input[type="text"]');
+    inputs.forEach(input => input.classList.remove('error'));
+    const errorMsgs = document.querySelectorAll('.error-msg');
+    errorMsgs.forEach(msg => {
+      msg.textContent = '';
+      msg.classList.remove('show');
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  // LOGIN HANDLER
+  // ═══════════════════════════════════════════
+  function handleLogin(event) {
+    event.preventDefault();
+    clearAllErrors();
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    let hasErrors = false;
+
+    if (!email) {
+      showError('loginEmail', 'loginEmailError', 'Email is required');
+      hasErrors = true;
+    } else if (!validateEmail(email)) {
+      showError('loginEmail', 'loginEmailError', 'Please enter a valid email address');
+      hasErrors = true;
+    }
+
+    if (!password) {
+      showError('loginPassword', 'loginPasswordError', 'Password is required');
+      hasErrors = true;
+    }
+
+    if (!hasErrors) {
+      document.getElementById('successMsg').textContent = '✓ Login successful! Redirecting...';
+      document.getElementById('successMsg').classList.add('show');
+      
+      console.log('Login successful:', { email, rememberMe: document.getElementById('rememberMe').checked });
+      
+      setTimeout(() => {
+        alert('Welcome back to CIBA! You have been logged in successfully.');
+        document.getElementById('loginForm').reset();
+        document.getElementById('successMsg').classList.remove('show');
+      }, 2000);
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // SIGNUP HANDLER
+  // ═══════════════════════════════════════════
+  function handleSignup(event) {
+    event.preventDefault();
+    clearAllErrors();
+
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirm').value;
+    const agreeTerms = document.getElementById('agreeTerms').checked;
+
+    let hasErrors = false;
+
+    if (!name) {
+      showError('signupName', 'signupNameError', 'Full name is required');
+      hasErrors = true;
+    } else if (name.length < 3) {
+      showError('signupName', 'signupNameError', 'Name must be at least 3 characters');
+      hasErrors = true;
+    }
+
+    if (!email) {
+      showError('signupEmail', 'signupEmailError', 'Email is required');
+      hasErrors = true;
+    } else if (!validateEmail(email)) {
+      showError('signupEmail', 'signupEmailError', 'Please enter a valid email address');
+      hasErrors = true;
+    }
+
+    if (!password) {
+      showError('signupPassword', 'signupPasswordError', 'Password is required');
+      hasErrors = true;
+    } else if (!validatePassword(password)) {
+      showError('signupPassword', 'signupPasswordError', 'Password: 8+ chars, 1 uppercase, 1 number');
+      hasErrors = true;
+    }
+
+    if (!confirmPassword) {
+      showError('signupConfirm', 'signupConfirmError', 'Please confirm your password');
+      hasErrors = true;
+    } else if (password !== confirmPassword) {
+      showError('signupConfirm', 'signupConfirmError', 'Passwords do not match');
+      hasErrors = true;
+    }
+
+    if (!agreeTerms) {
+      document.getElementById('signupTermsError').textContent = 'You must agree to the terms';
+      document.getElementById('signupTermsError').classList.add('show');
+      hasErrors = true;
+    }
+
+    if (!hasErrors) {
+      document.getElementById('successMsg2').textContent = '✓ Account created successfully!';
+      document.getElementById('successMsg2').classList.add('show');
+      
+      console.log('Signup successful:', { name, email });
+      
+      setTimeout(() => {
+        alert('Welcome to CIBA! Your account has been created successfully.');
+        document.getElementById('signupForm').reset();
+        document.getElementById('successMsg2').classList.remove('show');
+        switchTab('login');
+      }, 2000);
+    }
+  }
+
+  // Real-time validation on blur
+  document.getElementById('loginEmail')?.addEventListener('blur', function() {
+    if (this.value && !validateEmail(this.value)) {
+      showError('loginEmail', 'loginEmailError', 'Invalid email format');
+    } else if (this.value) {
+      clearError('loginEmail', 'loginEmailError');
+    }
+  });
+
+  document.getElementById('signupEmail')?.addEventListener('blur', function() {
+    if (this.value && !validateEmail(this.value)) {
+      showError('signupEmail', 'signupEmailError', 'Invalid email format');
+    } else if (this.value) {
+      clearError('signupEmail', 'signupEmailError');
+    }
+  });
+
+  document.getElementById('signupPassword')?.addEventListener('blur', function() {
+    if (this.value && !validatePassword(this.value)) {
+      showError('signupPassword', 'signupPasswordError', 'Password: 8+ chars, 1 uppercase, 1 number');
+    } else if (this.value) {
+      clearError('signupPassword', 'signupPasswordError');
+    }
+  });
+
+  document.getElementById('signupConfirm')?.addEventListener('blur', function() {
+    const password = document.getElementById('signupPassword').value;
+    if (this.value && password && this.value !== password) {
+      showError('signupConfirm', 'signupConfirmError', 'Passwords do not match');
+    } else if (this.value) {
+      clearError('signupConfirm', 'signupConfirmError');
+    }
+  });
+</script>
+
+</body>
+</html>
